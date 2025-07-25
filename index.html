@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Guess the Number</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1>🎯 Guess the Number!(5 Tries)</h1>
+<p>Pick a number between 1 and 100.</p>
+<input type="number" id="guess" placeholder="Enter your guess">
+<button onclick="checkGuess()" id="btn">Guess</button>
+<p id="message"></p>
+</div>
+
+ <script>
+ const number = Math.floor(Math.random() * 100) + 1;
+ let attempts = 0;
+ const maxAttempts = 5;
+
+ function checkGuess() {
+ const guess = parseInt(document.getElementById("guess").value);
+ const message = document.getElementById("message");
+ const button = document.getElementById("btn");
+
+ if (isNaN(guess)) {
+ message.textContent = "Please enter a valid number.";
+ return;
+ }
+
+ attempts++;
+
+ if (guess === number) {
+ message.textContent = `🎉 Correct! The number was ${number}`;
+ button.disabled = true;
+ } else if (attempts >= maxAttempts) {
+ message.textContent = `❌ Game Over! The number was ${number}`;
+ button.disabled = true;
+ } else if (guess < number) {
+ message.textContent = `Too low! Attempts left: ${maxAttempts - attempts}`;
+ } else if (guess > number) {
+     message.textContent = `Too high! Attempts left: ${maxAttempts - attempts}`;
+ }
+ }
+ </script>
+</body>
+</html>
